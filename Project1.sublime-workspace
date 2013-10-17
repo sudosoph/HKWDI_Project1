@@ -1,0 +1,473 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"cur",
+				"currentPlayer"
+			],
+			[
+				"curren",
+				"currentSymbol"
+			],
+			[
+				"Not",
+				"notOccupied"
+			],
+			[
+				"cu",
+				"currentSymbol"
+			],
+			[
+				"random",
+				"randomnumber"
+			],
+			[
+				"s",
+				"sans-serif"
+			],
+			[
+				"Make",
+				"markSquareAsOccupiedAt"
+			],
+			[
+				"is",
+				"isSquareOccupiedBy"
+			],
+			[
+				"current",
+				"currentSquareClickedAlready"
+			],
+			[
+				"changeSquare",
+				"changeSquareContent"
+			],
+			[
+				"border",
+				"border-radius"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 2177,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/controllers/main.js",
+			"settings":
+			{
+				"buffer_size": 238,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/controllers/howto.js",
+			"settings":
+			{
+				"buffer_size": 238,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/app.js",
+			"settings":
+			{
+				"buffer_size": 3984,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/gameboard.html",
+			"settings":
+			{
+				"buffer_size": 1099,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/controllers/gameboard.js",
+			"settings":
+			{
+				"buffer_size": 4749,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/views/main.html",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/styles/main.css",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/views/howto.html",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/views/gameboard.html",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/scripts/controllers/index.js",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/views/index.html",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/scripts/controllers/gameboard.js",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/scripts/controllers/main.js",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/.editorconfig",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/node_modules/grunt-google-cdn/node_modules/bower/node_modules/unzip/node_modules/match-stream/examples/lorem.txt",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/scripts/controllers/howto.js",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/splash.html",
+		"/Users/sophiaraji/GA_WDI/Javascript scratchpad",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/scripts/script.js",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/app/scripts/app.js",
+		"/Users/sophiaraji/GA_WDI/sample.js",
+		"/Users/sophiaraji/GA_WDI/HKWDI_Project1/node_modules/grunt/node_modules/js-yaml/examples/sample_document.js",
+		"/Users/sophiaraji/GA_WDI/WDI_HK_1_Work/homework_1/sophia_raji.md",
+		"/Users/sophiaraji/.gitconfig",
+		"/Users/sophiaraji/GA_WDI/sophia_profile/app/index.html",
+		"/Users/sophiaraji/GA_WDI/WDI_HK_1_Work/sophia_profile"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"current",
+			"currentpl",
+			"isDiag",
+			"on",
+			"notOc",
+			"!not",
+			"currentSym",
+			"swap",
+			"isWin",
+			"make",
+			"makeN",
+			"makeNEx$",
+			"makeNEx",
+			"currentSymbol",
+			"button",
+			"notOc",
+			"currentpla",
+			"currentSy",
+			"toggle",
+			"button",
+			"isTopHorizontalThreeOccupiedByMe",
+			"content",
+			"markSquareAsOccupied\n",
+			"markSquareAsOccupied",
+			"margin",
+			"markSquareAsOccupied",
+			"markSquareAsOccupied\nmargi",
+			"markSquareAsOccupied",
+			"hover",
+			"margi",
+			"margin",
+			"css",
+			"google"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/index.html",
+					"settings":
+					{
+						"buffer_size": 2177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								900,
+								900
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 299.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/scripts/controllers/main.js",
+					"settings":
+					{
+						"buffer_size": 238,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								169,
+								169
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/scripts/controllers/howto.js",
+					"settings":
+					{
+						"buffer_size": 238,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								176,
+								176
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/scripts/app.js",
+					"settings":
+					{
+						"buffer_size": 3984,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2841,
+								2841
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1514.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/views/gameboard.html",
+					"settings":
+					{
+						"buffer_size": 1099,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								210,
+								211
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/scripts/controllers/gameboard.js",
+					"settings":
+					{
+						"buffer_size": 4749,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1552,
+								1552
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 290.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				".editorconfig"
+			],
+			[
+				"lorem",
+				"node_modules/grunt-google-cdn/node_modules/bower/node_modules/unzip/node_modules/match-stream/examples/lorem.txt"
+			],
+			[
+				"app.",
+				"app/scripts/app.js"
+			],
+			[
+				"index",
+				"app/index.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 218.0,
+	"status_bar_visible": true
+}

@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('TickeyApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+angular.module('tickeyApp')
+  .controller('MainCtrl', function ($scope, $rootScope) {
+
+  	$rootScope.hideHome = true;
+  	$rootScope.hideGameBoard = false;
+  	$rootScope.hideHowTo = false;
+
+  	$scope.name = "Main";
+  	
   });
