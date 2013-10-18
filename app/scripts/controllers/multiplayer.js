@@ -59,7 +59,7 @@ angular.module('tickeyApp')
                 } else {
                     console.log("My turn but receiving");
                 }
-            }
+            })
 
         $scope.handleClick = function(location) {
         if (!$scope.gameEnded) {
