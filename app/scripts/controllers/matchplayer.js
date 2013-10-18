@@ -2,9 +2,9 @@
 
 angular.module('tickeyApp')
 	.controller('MatchPlayerCtrl', function($scope, angularFire, $routeParams, $location) {
-		$scope.waitingRoom = {};
+		$scope.waitingRoom = [];
 		var waitingRoomRef = new Firebase("http://sophia-ttt.firebaseio.com/waitingroom/" + $routeParams.id);
-		$scope.promise = angularFire(waitingRoomRef, $scope, "waitingRoom");
+		$scope.promise = angularFire(waitingRoomRef, $scope, "waitingRoom", []);
 
 		
 		$scope.promise.then(function() {
@@ -15,6 +15,7 @@ angular.module('tickeyApp')
 				$scope.createWaitingRoom();
 				}
 			});
+
 
 		$scope.createWaitingRoom = function() {
 			$scope.waitingRoom = {xJoined: true, gameBoardNumber: generateGameBoardNumber()}

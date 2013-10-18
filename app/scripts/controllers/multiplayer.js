@@ -1,196 +1,145 @@
 'use strict';
 
 angular.module('tickeyApp')
-    .controller('MultiplayerCtrl', function($scope, $rootScope, $timeout, $routeParams, localStorageService, angularFire) {
-        $scope.gameBoardId = $routeParams.id;
-        $scope.mySymbol = $routeParams.symbol;
+    .controller('MultiplayerCtrl', function ($scope, $rootScope, $timeout, $routeParams, angularFire) {
+            $scope.gameBoardId = $routeParams.id;
+            $scope.mySymbol = $routeParams.symbol;
+            $scope.myTurn = false;
+            $scope.turnNum = 0;
+            $rootScope.gameEnded = false;
 
-        $scope.gameBoard = [];
-        var gameBoardRef = new Firebase("https://sophia-ttt.firebaseio.com/room/" + $routeParams.id);
-        $scope.promise = angularFire(gameBoardRef, $scope, "gameBoard");
+            $scope.cells = ["", "", "", "", "", "", "", "", ""];
+            var gameBoardRef = new Firebase("https://sophia-ttt.firebaseio.com/room/" + $routeParams.id);
+            $scope.promise = angularFire(gameBoardRef, $scope, "cells", []);
 
-        var ref = new Firebase('https://sophia-ttt.firebaseio.com');
-        var p = angularFire(ref, $scope, "leaderData"); //binds leaderData to ref Firebase
+            $scope.promise.then(function() {
+                console.log("In Game Board");
+                console.log($scope.gameBoardId);
+                console.log($scope.mySymbol);
 
-        // $scope.leaderData = {name: 
-        //   {
-        //     SeededData: 0
-        //   }
-        // };
+                $scope.cells = ["", "", "", "", "", "", "", "", ""];
 
-        /*
-      Step 1
-    */
-        $scope.promise.then (function () {
-          console.log("In Game Board");
-          console.log($scope.gameBoardId);
-          console.log($scope.mySymbol);      
-        });
-
-        /*
-      Step 2
-    */
-        $scope.promise.then(function() {
-            if ($scope.gameBoard.length == 0 && $routeParams.symbol == 'x') {
-                console.log("I am First Move: Symbol: " + $routeParams.symbol);
-                $scope.makeMyMove();
-            } else {
-                console.log("I am Second Move: Symbol: " + $routeParams.symbol);
-                $scope.waitForOpponentToMove();
-            }
-        });
-
-        $scope.waitForOpponentToMove = function() {
-            gameBoardRef.once('child_added', function(snapshot) {
-                // gameBoardRef.off('child_added');
-
-                if ($scope.isLosing()) {
-                    // print losing
-                    // redirect to match player if play again
-                } else if ($scope.isDraw()) {
-                    // print draw
-                    // redirect to match player if play again
+                if ($scope.cells.length == 0 && $routeParams.symbol == 'x') {
+                    console.log("I am First Move: Symbol: " + $routeParams.symbol);
+                    $scope.myTurn = true;
                 } else {
-                    $scope.makeMyMove();
+                    console.log("I am Second Move: Symbol: " + $routeParams.symbol);
+                    $scope.myTurn = false;
                 }
             });
-        };
 
-        $scope.makeMyMove = function() {
-            $scope.listenForMyClick();
+            gameBoardRef.on('value', function(snapshot) {
+                console.log("snapshot received");
+                if (!$scope.gameEnded && !$scope.myTurn) {
+                    if (snapshot.val() != null) {
+                        if (!arrays_equal(snapshot.val(), $scope.cells)) {
+                            console.log("different gameboard- data from remote");
+                            if ($scope.isLosing($scope.mySymbol, snapshot.val())) {
+                                console.log("opponent won. you lost.");
+                                $timeout(function() {
+                                    window.alert("You lost!");
+                                }, 50);
+                                $scope.gameEnded = true;
+                            } else if ($scope.isDraw()) {
+                                console.log("It's a tie!");
+                                $scope.mySymbol = "";
+                                $scope.gameEnded = true;
+                            } else {
+                                console.log("My turn");
+                                $scope.myTurn = true;
+                                $scope.turnNum++;
+                            }
+                            console.log("After opponent clicked: turn # " + $scope.turnNum + "$scope.cells: " + snapshot.val().join(""));
+                        } else {
+                            console.log("same gameboard");
+                        }
+                    } else {
+                        console.log("Snapshot empty");
+                    }
+                } else {
+                    console.log("My turn but receiving");
+                }
+            }
 
-            if ($scope.isWinning()) {
-                // print winning
-                // redirect to match player if play again
+        $scope.handleClick = function(location) {
+        if (!$scope.gameEnded) {
+            if ($scope.myTurn && $scope.notOccupied(location)) {
+            console.log("I clicked on index: " + location);
+
+            $scope.gameBoard[location] = $scope.mySymbol;
+
+            if ($scope.isWinning($scope.mySymbol, $scope.gameBoard)) {
+                $timeout(function() {window.alert('You won!');}, 50);
+                $scope.gameEnded = true;
             } else if ($scope.isDraw()) {
-                // print draw
-                // redirect to match player if play again
+                $scope.mySymbol = '';
+                $scope.gameEnded = true;
             } else {
-                $scope.waitForOpponentToMove();
+                $scope.myTurn = false;
+                $scope.turnNum++;
             }
-        }
-
-        $scope.listenForMyClick = function(location) {
-            if ($scope.notOccupied(location)) {
-                $scope.makeNextMove(location, $scope.currentSymbol);
-            }
-            if ($scope.isWinning($scope.currentSymbol)) {
-                alert($scope.currentSymbol + " wins!");
-                $scope.addScore();
-                $rootScope.gameEnded = true;
-            } else {
-                $scope.swapSymbol();
-                setTimeout(function() {
-                    $scope.$apply(function() {
-                        $scope.selectRandomSquare($scope.currentSymbol);
-                        $scope.isLosing();
-                        $scope.swapSymbol();
-                        console.log($scope.cells);
-                    });
-                }, 1000);
+              console.log("After my click: turn # " + $scope.turnNum + "$scope.gameBoard: " + $scope.gameBoard.join(""));
             } 
+          }
         }
 
-        $scope.isLosing = function() {
-            if ($scope.isWinning($scope.currentSymbol)) {
-                alert($scope.currentSymbol + " wins!");
-                $scope.addScore();
-                $rootScope.gameEnded = true;
-            }
+        var xPatterns = [
+            'xxx......',
+            '...xxx...',
+            '......xxx',
+            'x..x..x..',
+            '.x..x..x.',
+            '..x..x..x',
+            'x...x...x',
+            '..x.x.x.x..'
+        ];
+
+        var oPatterns = xPatterns.map(function(str) {
+            return str.replace(/x/g, 'o');
+        });
+
+        function arrays_equal(a, b) {
+            return !(a < b || b < a);
         }
 
-        $scope.isWinning = function(currentPlayer) {
-            for (var i = 0; i <= 9; i += 3) {
-                if ($scope.isSameSymbolsIn($scope.cells[i], $scope.cells[i + 1], $scope.cells[i + 2], currentPlayer)) {
+        $scope.isWinning = function(currentPlayer, gameBoardData) {
+            console.log("isWinning");
+            $scope.gameBoardStr = gameBoardData.join("");
+            var spacePattern = /\s/g;
+            var patternString = $scope.gameBoardStr.replace(spacePattern, '.');
+            console.log("Gameboard String: " + patternString)
+            if (playerSymbol == 'x') {
+                var pattern = xPatterns;
+            } else {
+                var pattern = oPatterns;
+            };
+
+            for (var i = 0; i < pattern.length; i++) {
+                var re = new RegExp(patterns[i], "i");
+                if (patternString.match(re)) {
+                    console.log("Pattern Matching success. We won");
                     return true;
-                }
-            }
-
-            // check horizontal
-            for (var i = 0; i <= 3; i++) {
-                if ($scope.isSameSymbolsIn($scope.cells[i], $scope.cells[i + 3], $scope.cells[i + 6], currentPlayer)) {
-                    return true;
-                }
-            }
-
-            // check diagonal
-            return $scope.isDiagonalSameSymbols(currentPlayer);
-
-        }
-
-        $scope.isDraw = function() {
+                };
+            };
             return false;
         }
 
-        $scope.getName = function() {
-            $scope.userName = prompt("Enter your name");
-            // console.log($scope.userName);
+        $scope.isLosing = function(mySymbol, gameBoardData) {
+            var opponentSymbol = mySymbol == "x" ? "o" : "x";
+            return $scope.testForWin(opponentSymbol, gameBoardData);
         }
 
-        $scope.addWinToLeaderboard = function() {
-            if ($scope.userName) {
-                if ($scope.leaderData.leaderBoard.hasOwnProperty($scope.userName)) {
-                    $scope.leaderData.leaderBoard[$scope.userName]++;
-                } else {
-                    $scope.leaderData.leaderBoard[$scope.userName] = 1;
-                }
-            }
-
+        $scope.isDraw = function() {
+            return ($scope.turnNum === 9);
         }
 
-        $rootScope.hideGameBoard = true;
-        $rootScope.hideHowTo = false;
-        $rootScope.hideHome = false;
-        $rootScope.gameEnded = false;
-
-        $scope.cells = ["", "", "", "", "", "", "", "", ""];
-        $scope.name = "Gameboard";
-
-        $scope.addWin = localStorageService.get("addWin");
-        if ($scope.addWin == undefined) {
-            $scope.addWin = 0;
-
-        }
+        $rootScope.hideGameBoard = true; $rootScope.hideHowTo = false; $rootScope.hideHome = false;
 
         $scope.currentSymbol = "x";
-
-        $scope.isDiagonalSameSymbols = function(currentPlayer) {
-            $scope.firstDiagonalCheck = ($scope.cells[0] == currentPlayer &&
-                $scope.cells[4] == currentPlayer &&
-                $scope.cells[8] == currentPlayer);
-            $scope.secondDiagonalCheck = ($scope.cells[2] == currentPlayer &&
-                $scope.cells[4] == currentPlayer &&
-                $scope.cells[6] == currentPlayer);
-            return $scope.firstDiagonalCheck || $scope.secondDiagonalCheck;
-        }
 
         $scope.notOccupied = function(location) {
             $scope.result = ($scope.cells[location - 1] == "");
             return $scope.result;
-        }
-
-        $scope.isSameSymbolsIn = function(first_cell_content, second_cell_content, third_cell_content, currentPlayer) {
-            $scope.first_comparison = first_cell_content == currentPlayer;
-            $scope.second_comparison = second_cell_content == currentPlayer;
-            $scope.third_comparison = third_cell_content == currentPlayer;
-
-            $scope.result = $scope.first_comparison && $scope.second_comparison && $scope.third_comparison;
-
-
-            return $scope.result;
-        }
-
-        $scope.swapSymbol = function() {
-            if ($scope.currentSymbol == "x") {
-                $scope.currentSymbol = "o";
-            } else {
-                $scope.currentSymbol = "x";
-            }
-        }
-
-        $scope.addScore = function() {
-            $scope.addWin = parseInt($scope.addWin) + 1;
-            localStorageService.add("addWin", $scope.addWin);
         }
 
         $scope.clearBoard = function() {
@@ -204,51 +153,4 @@ angular.module('tickeyApp')
             $scope.currentSymbol = "x";
             $rootScope.gameEnded = false;
         }
-
-        // Lab 2
-        $scope.selectRandomSquare = function(currentPlayer) {
-            // generate a random number
-            // test if the location is occupied
-            // if it is occupied, generate again
-            $scope.randomnumber;
-            do {
-                $scope.randomnumber = (Math.floor(Math.random() * 9) + 1);
-            } while (!$scope.notOccupied($scope.randomnumber));
-        }
-
-        //TIMER APP
-        $scope.minutes = "00";
-        $scope.seconds = "00";
-        $scope.currentNumberOfSeconds = 0;
-        $scope.intervalCallback;
-
-        $scope.increment = function() {
-            $scope.currentNumberOfSeconds++;
-
-            $scope.minutes = $scope.formatZeroPadding(Math.floor($scope.currentNumberOfSeconds / 60));
-            $scope.seconds = $scope.formatZeroPadding($scope.currentNumberOfSeconds % 60);
-
-            $scope.intervalCallback = $timeout($scope.increment, 1000);
-        }
-
-        $scope.startTimer = function() {
-            $scope.intervalCallback = $timeout($scope.increment, 1000);
-        }
-
-        $scope.stopTimer = function() {
-            $timeout.cancel($scope.intervalCallback);
-        }
-
-        $scope.resetTimer = function() {
-            $scope.minutes = "00";
-            $scope.seconds = "00";
-        }
-
-        $scope.formatZeroPadding = function(integer) {
-            if (integer < 10) {
-                return "0" + integer;
-            } else {
-                return integer;
-            }
-        }
-    });
+});
