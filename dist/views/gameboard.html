@@ -1,0 +1,41 @@
+<div id="gameboard">
+  <div class="row">
+    <div class="cell lt {{ cells[0] }}" id="1" data-ng-click="handleClick(1)">{{ cells[0] }}</div>
+    <div class="cell mt {{ cells[1] }}" id="2" data-ng-click="handleClick(2)">{{ cells[1] }}</div>
+    <div class="cell rt {{ cells[2] }}" id="3" data-ng-click="handleClick(3)">{{ cells[2] }}</div>
+  </div>
+
+  <div class="row">
+    <div class="cell lm {{ cells[3] }}" id="4" data-ng-click="handleClick(4)">{{ cells[3] }}</div>
+    <div class="cell mm {{ cells[4] }}" id="5" data-ng-click="handleClick(5)">{{ cells[4] }}</div>
+    <div class="cell rm {{ cells[5] }}" id="6" data-ng-click="handleClick(6)">{{ cells[5] }}</div>
+  </div>
+
+  <div class="row">
+    <div class="cell lb {{ cells[6] }}" id="7" data-ng-click="handleClick(7)">{{ cells[6] }}</div>
+    <div class="cell mb {{ cells[7] }}" id="8" data-ng-click="handleClick(8)">{{ cells[7] }}</div>
+    <div class="cell rb {{ cells[8] }}" id="9" data-ng-click="handleClick(9)">{{ cells[8] }}</div>
+  </div>
+  </div>
+
+    <!-- <span my-current-time="format"></span> -->
+      <div>Timer: {{minutes}}:{{seconds}}</div>
+      <div>Wins: {{addWin}}</div>
+      <button data-ng-click="startTimer()">Start</button>
+      <button data-ng-click="stopTimer()">Stop</button>
+      <button data-ng-click="resetTimer()">Reset</button>
+      <button data-ng-click="getName()">Enter Name</button>
+      <button data-ng-click="addWinToLeaderboard()">Add Win</button>
+      {{userName}}
+
+ <div id="play">
+    <button data-ng-show="gameEnded" type="button" id="button" data-ng-click="restartGame()">Play Again</button>
+  </div>
+  
+  <div>
+    <h3>Leaderboard</h3>
+    <ul>
+      <li data-ng-repeat="(name, score) in leaderData.name">{{name}} : {{score}} pts</li>
+    </ul>
+  </div>
+  
